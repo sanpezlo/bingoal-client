@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  bingoal-dev-client:
+    container_name: bingoal-dev-client
+    image: node:16.13.1-alpine3.15
+    expose:
+      - 4200
+    environment:
+      - NODE_ENV=development
+      - PORT=4200
+    working_dir: /usr/src/app
+    ports:
+      - 4200:4200
+    volumes:
+      - .:/usr/src/app
+      - ./node_modules:/usr/src/app/node_modules
+    command: npm run start -- --host 0.0.0.0
