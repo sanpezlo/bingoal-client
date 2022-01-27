@@ -1,0 +1,54 @@
+<main class="main">
+  <div class="register">
+    <h2 class="register__title">Sign up to your account</h2>
+    <p class="register__subtitle">
+      Or
+      <a class="register__a" routerLink="/auth/login">
+        sign in to your account
+      </a>
+    </p>
+    <form class="form" [formGroup]="registerForm" (submit)="onRegister()">
+      <div class="form__inputs">
+        <input
+          class="form__input {{ !isValidField('name') ? 'input-error' : '' }}"
+          id="name"
+          formControlName="name"
+          placeholder="Name"
+        />
+        <span [hidden]="isValidField('name')" class="input__error">
+          {{ getErrorMessage("name") }}
+        </span>
+      </div>
+      <div class="form__inputs">
+        <input
+          class="form__input {{ !isValidField('email') ? 'input-error' : '' }}"
+          id="email"
+          formControlName="email"
+          placeholder="Email address"
+        />
+        <span [hidden]="isValidField('email')" class="input__error">
+          {{ getErrorMessage("email") }}
+        </span>
+      </div>
+      <div class="form__inputs">
+        <input
+          class="form__input {{
+            !isValidField('password') ? 'input-error' : ''
+          }}"
+          id="password"
+          formControlName="password"
+          placeholder="Password"
+          type="password"
+        />
+        <span [hidden]="isValidField('password')" class="input__error"
+          >{{ getErrorMessage("password") }}
+        </span>
+      </div>
+      <div>
+        <button class="form__button" [disabled]="registerForm.invalid">
+          Sign up
+        </button>
+      </div>
+    </form>
+  </div>
+</main>

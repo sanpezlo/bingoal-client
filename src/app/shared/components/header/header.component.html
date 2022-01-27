@@ -1,0 +1,81 @@
+<header class="header">
+  <div class="logo">
+    <a href="#">
+      <img
+        class="logo__icon"
+        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+        alt=""
+      />
+    </a>
+  </div>
+  <div class="menu">
+    <button type="button" class="menu__button" aria-expanded="false">
+      <svg
+        class="menu__icon"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+    </button>
+  </div>
+  <nav class="nav">
+    <a href="#" class="nav__a"> Games </a>
+    <a href="#" class="nav__a"> Cards </a>
+    <a href="#" class="nav__a"> Users </a>
+  </nav>
+
+  <div class="auth">
+    <a class="auth__a" routerLink="/auth/login">Sign In</a>
+    <a class="auth__a a_primary" routerLink="/auth/register">Sign Up</a>
+  </div>
+
+  <div class="modal">
+    <div class="modal__header">
+      <img
+        class="modal__logo"
+        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+        alt=""
+      />
+      <div class="modal__close">
+        <button class="modal__button">
+          <svg
+            class="modal__icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <nav class="modal__nav">
+      <a href="#" class="modal__nav__a"> Games </a>
+      <a href="#" class="modal__nav__a"> Cards </a>
+      <a href="#" class="modal__nav__a"> Users </a>
+    </nav>
+    <div class="modal__auth">
+      <a href="#" class="modal__auth__a modal__a_primary">Sign Up</a>
+      <p class="modal__auth__footer">
+        Existing customer?
+        <a href="#" class="modal__auth__a">Sign In</a>
+      </p>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,43 @@
+<main class="main">
+  <div class="login">
+    <h2 class="login__title">Sign in to your account</h2>
+    <p class="login__subtitle">
+      Or
+      <a class="login__a" routerLink="/auth/register">
+        sign up to your account
+      </a>
+    </p>
+    <form class="form" [formGroup]="loginForm" (submit)="onLogin()">
+      <div class="form__inputs">
+        <input
+          class="form__input {{ !isValidField('email') ? 'input-error' : '' }}"
+          id="email"
+          formControlName="email"
+          placeholder="Email address"
+        />
+        <span [hidden]="isValidField('email')" class="input__error">
+          {{ getErrorMessage("email") }}
+        </span>
+      </div>
+      <div class="form__inputs">
+        <input
+          class="form__input {{
+            !isValidField('password') ? 'input-error' : ''
+          }}"
+          id="password"
+          formControlName="password"
+          placeholder="Password"
+          type="password"
+        />
+        <span [hidden]="isValidField('password')" class="input__error"
+          >{{ getErrorMessage("password") }}
+        </span>
+      </div>
+      <div>
+        <button class="form__button" [disabled]="loginForm.invalid">
+          Sign in
+        </button>
+      </div>
+    </form>
+  </div>
+</main>

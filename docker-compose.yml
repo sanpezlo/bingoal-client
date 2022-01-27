@@ -1,5 +1,29 @@
-version: '3.8'
+version: "3.8"
 services:
+  bingoal-dev-client-mongodb:
+    container_name: bingoal-dev-client-mongodb
+    image: mongo:4.4
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    networks:
+      - bingoal-dev-client_network
+  bingoal-dev-client-api:
+    container_name: bingoal-dev-client-api
+    image: sanpezlo/bingoal-api
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://root:password@bingoal-dev-client-mongodb:27017
+      - ACCESS_TOKEN_SECRET=ACCESS_TOKEN_SECRET
+      - ACCESS_TOKEN_EXPIRES_IN=3600
+      - REFRESH_TOKEN_SECRET=SECRET
+      - REFRESH_TOKEN_EXPIRES_IN=86400
+    ports:
+      - 80:80
+    depends_on:
+      - bingoal-dev-client-mongodb
+    networks:
+      - bingoal-dev-client_network
   bingoal-dev-client:
     container_name: bingoal-dev-client
     image: node:16.13.1-alpine3.15
@@ -15,3 +39,11 @@ services:
       - .:/usr/src/app
       - ./node_modules:/usr/src/app/node_modules
     command: npm run start -- --host 0.0.0.0
+    depends_on:
+      - bingoal-dev-client-api
+    networks:
+      - bingoal-dev-client_network
+networks:
+  bingoal-dev-client_network:
+    driver: bridge
+    name: bingoal-dev-client_network
