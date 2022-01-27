@@ -8,14 +8,13 @@ import { UsersService } from '@app/pages/users/services/users.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
-  private user: IUser | null = null;
+export class HeaderComponent {
+  isOpen: boolean = false;
+  isOpenDropdown: boolean = false;
 
-  constructor(private readonly usersService: UsersService) {}
+  constructor(public readonly usersService: UsersService) {}
 
-  ngOnInit(): void {
-    this.usersService.user$.subscribe((user) => {
-      this.user = user;
-    });
+  toggle() {
+    this.isOpen = !this.isOpen;
   }
 }

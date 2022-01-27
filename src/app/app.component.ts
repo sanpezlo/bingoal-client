@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.authService.auth$.subscribe((auth) => {
       if (auth == null && this.usersService.userValue == null) return;
-      if (auth != null) return this.usersService.getMe();
+      if (auth != null) return this.usersService.getMe().subscribe();
       return this.usersService.setUser();
     });
 

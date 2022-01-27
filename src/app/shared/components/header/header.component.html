@@ -8,8 +8,9 @@
       />
     </a>
   </div>
+
   <div class="menu">
-    <button type="button" class="menu__button" aria-expanded="false">
+    <button type="button" class="menu__button" (click)="toggle()">
       <svg
         class="menu__icon"
         xmlns="http://www.w3.org/2000/svg"
@@ -27,18 +28,41 @@
       </svg>
     </button>
   </div>
-  <nav class="nav">
-    <a href="#" class="nav__a"> Games </a>
-    <a href="#" class="nav__a"> Cards </a>
-    <a href="#" class="nav__a"> Users </a>
-  </nav>
 
-  <div class="auth">
-    <a class="auth__a" routerLink="/auth/login">Sign In</a>
-    <a class="auth__a a_primary" routerLink="/auth/register">Sign Up</a>
-  </div>
+  <ng-container *ngIf="usersService.user$ | async; else showAuth">
+    <nav class="nav">
+      <a class="nav__a"> Games </a>
+      <a class="nav__a"> Cards </a>
+      <a class="nav__a" routerLink="/users"> Users </a>
+    </nav>
 
-  <div class="modal">
+    <div class="user">
+      <div>
+        <button class="user__button" (click)="toggle()">
+          <img
+            class="user__img"
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            alt=""
+          />
+        </button>
+      </div>
+
+      <div class="user__dropdown" [hidden]="!isOpen">
+        <a href="#" class="dropdown__a">Your Profile</a>
+        <a href="#" class="dropdown__a">Settings</a>
+        <a href="#" class="dropdown__a">Sign out</a>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #showAuth>
+    <div class="auth">
+      <a class="auth__a" routerLink="/auth/login">Sign In</a>
+      <a class="auth__a a_primary" routerLink="/auth/register">Sign Up</a>
+    </div>
+  </ng-template>
+
+  <div class="modal" [hidden]="!isOpen">
     <div class="modal__header">
       <img
         class="modal__logo"
@@ -46,7 +70,7 @@
         alt=""
       />
       <div class="modal__close">
-        <button class="modal__button">
+        <button class="modal__button" (click)="toggle()">
           <svg
             class="modal__icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -65,17 +89,50 @@
         </button>
       </div>
     </div>
-    <nav class="modal__nav">
-      <a href="#" class="modal__nav__a"> Games </a>
-      <a href="#" class="modal__nav__a"> Cards </a>
-      <a href="#" class="modal__nav__a"> Users </a>
-    </nav>
-    <div class="modal__auth">
-      <a href="#" class="modal__auth__a modal__a_primary">Sign Up</a>
-      <p class="modal__auth__footer">
-        Existing customer?
-        <a href="#" class="modal__auth__a">Sign In</a>
-      </p>
-    </div>
+
+    <ng-container
+      *ngIf="usersService.user$ | async as user; else showModalAuth"
+    >
+      <nav class="modal__nav">
+        <a class="modal__nav__a"> Games </a>
+        <a class="modal__nav__a"> Cards </a>
+        <a class="modal__nav__a" routerLink="/users"> Users </a>
+      </nav>
+
+      <div class="modal__user">
+        <div class="modal__user__header">
+          <img
+            class="modal__user__img"
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            alt=""
+          />
+          <div class="modal__user__info">
+            <div class="modal__user__name">
+              {{ user.name }}
+            </div>
+            <div class="modal__user__email">
+              {{ user.email }}
+            </div>
+          </div>
+        </div>
+        <nav class="modal__nav">
+          <a href="#" class="modal__nav__a"> Your Profile </a>
+          <a href="#" class="modal__nav__a"> Settings </a>
+          <a href="#" class="modal__nav__a"> Sign out </a>
+        </nav>
+      </div>
+    </ng-container>
+
+    <ng-template #showModalAuth>
+      <div class="modal__auth">
+        <a class="modal__auth__a modal__a_primary" routerLink="/auth/register"
+          >Sign Up</a
+        >
+        <p class="modal__auth__footer">
+          Existing customer?
+          <a class="modal__auth__a" routerLink="/auth/login">Sign In</a>
+        </p>
+      </div>
+    </ng-template>
   </div>
 </header>
