@@ -1,1 +1,11 @@
-<p>users works!</p>
+<div class="container">
+  <main class="main" *ngIf="users$ | async as users; else loading">
+    <ng-container *ngFor="let user of users">
+      <app-user-card [user]="user"></app-user-card>
+    </ng-container>
+  </main>
+  <ng-template #loading>
+    <app-loading class="container__loading"></app-loading>
+  </ng-template>
+  <aside class="aside"></aside>
+</div>

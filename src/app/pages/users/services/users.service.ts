@@ -4,7 +4,12 @@ import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
 import { isEqual } from 'lodash';
 
 import { environment } from '@env/environment';
-import { CreateUserDto, IUser } from '@pages/users/interfaces/user.interface';
+import {
+  CreateUserDto,
+  FindOneUserDto,
+  FindUsersDto,
+  IUser,
+} from '@pages/users/interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +39,17 @@ export class UsersService {
       .pipe(tap((user: IUser) => this.setUser(user)));
   }
 
-  getMe(): Observable<IUser> {
+  find(findUsersDto: FindUsersDto = {}): Observable<IUser[]> {
+    return this.http.get<IUser[]>(this.url, {
+      params: findUsersDto as { [param: string]: number },
+    });
+  }
+
+  findOne(findOneUserDto: FindOneUserDto): Observable<IUser> {
+    return this.http.get<IUser>(`${this.url}/${findOneUserDto.id}`);
+  }
+
+  me(): Observable<IUser> {
     return this.http.get<IUser>(`${this.url}/me`).pipe(
       tap((user: IUser) => this.setUser(user)),
       catchError((error) => {

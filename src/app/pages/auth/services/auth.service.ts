@@ -1,13 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {
-  BehaviorSubject,
-  catchError,
-  concatAll,
-  map,
-  Observable,
-  tap,
-} from 'rxjs';
+import { BehaviorSubject, catchError, Observable, switchMap, tap } from 'rxjs';
 import { isEqual } from 'lodash';
 
 import { environment } from '@env/environment';
@@ -63,13 +56,12 @@ export class AuthService {
       password: registerDto.password,
     };
     return this.usersService.create(createUserDto).pipe(
-      map(() =>
+      switchMap(() =>
         this.login({
           email: registerDto.email,
           password: registerDto.password,
         })
-      ),
-      concatAll()
+      )
     );
   }
 

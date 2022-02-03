@@ -5,7 +5,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, concatAll, map, Observable } from 'rxjs';
+import { catchError, Observable, switchMap } from 'rxjs';
 
 import { RefreshDto } from '@app/pages/auth/interfaces/auth.interface';
 import { AuthService } from '@app/pages/auth/services/auth.service';
@@ -50,11 +50,10 @@ export class AuthInterceptorService implements HttpInterceptor {
       refresh: auth.refresh_token,
     };
     return this.authService.refresh(refreshDto).pipe(
-      map(() => this.setAutorizationHeader(req, next)),
+      switchMap(() => this.setAutorizationHeader(req, next)),
       catchError((err) => {
         throw error;
-      }),
-      concatAll()
+      })
     );
   }
 }
