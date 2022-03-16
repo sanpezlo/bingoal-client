@@ -1,0 +1,9 @@
+<div class="container">
+  <main class="main" *ngIf="user$ | async as user; else loading">
+    {{ user.email }}
+  </main>
+  <ng-template #loading>
+    <app-loading class="container__loading"></app-loading>
+  </ng-template>
+  <aside class="aside"></aside>
+</div>

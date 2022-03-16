@@ -8,6 +8,8 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=password
     networks:
       - bingoal-dev-client_network
+    volumes:
+      - ./db:/data/db
   bingoal-dev-client-api:
     container_name: bingoal-dev-client-api
     image: sanpezlo/bingoal-api
