@@ -16,6 +16,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'cards',
+    loadChildren: () =>
+      import('@pages/cards/cards.module').then((m) => m.CardsModule),
+    canActivate: [AuthGuard],
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full',

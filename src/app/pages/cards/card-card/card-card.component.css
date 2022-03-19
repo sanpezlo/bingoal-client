@@ -1,0 +1,20 @@
+.card-card {
+  border-radius: 0.375rem;
+  border-style: solid;
+  border-color: #e5e7eb;
+  border-width: 1px;
+}
+
+.card-card__body {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-style: solid;
+  border-color: #e5e7eb;
+  border-bottom-width: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}

@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card__header">
+    <span>B</span>
+    <span>I</span>
+    <span>N</span>
+    <span>G</span>
+    <span>O</span>
+  </div>
+  <ng-container *ngFor="let number of data; let i = index">
+    <div class="card__number {{ score[i] ? 'active' : '' }}">
+      {{ number }}
+    </div>
+  </ng-container>
+</div>
